@@ -1,0 +1,24 @@
+version: 0.1
+backend: 
+    phases:
+      build:
+        commands:
+          - amplify --version
+          - '# Execute Amplify CLI with the helper script'
+          - chmod u+x ./myamplifypush.sh
+          - ./myamplifypush.sh
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - yarn install
+    build:
+      commands:
+        - yarn run build
+  artifacts:
+    baseDirectory: build
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
